@@ -1,388 +1,535 @@
-/*
-====================================================
- Mehrad Mall WiFi
- Version : 1.0.1
-====================================================
-*/
-
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
+/* =======================================================
+   Mehrad Mall WiFi
+   Version 1.3
+======================================================= */
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
 
-font-family:'Vazirmatn',sans-serif;
-direction:rtl;
-overflow:hidden;
+    direction:rtl;
 
-min-height:100vh;
+    font-family:
 
-display:flex;
-justify-content:center;
-align-items:center;
+    Tahoma,
 
-background:
-linear-gradient(135deg,#0A2E57,#0F4C81,#2563EB);
+    Arial,
 
-position:relative;
+    sans-serif;
+
+    height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    position:relative;
+
+    background:#f4f7fb;
 
 }
 
-/* -------------------- */
+/* ==========================
+   Background
+========================== */
 
 .background{
 
-position:absolute;
-inset:0;
+    position:absolute;
 
-overflow:hidden;
+    inset:0;
 
-}
+    background:
 
-/* -------------------- */
+    linear-gradient(
 
-.circle{
+        135deg,
 
-position:absolute;
+        #0F4C81,
 
-border-radius:50%;
+        #1E88E5,
 
-filter:blur(40px);
+        #64B5F6
 
-opacity:.35;
-
-animation:float 10s ease-in-out infinite;
+    );
 
 }
 
-.c1{
+.background::after{
 
-width:420px;
-height:420px;
+    content:"";
 
-background:#4FC3F7;
+    position:absolute;
 
-top:-100px;
-left:-120px;
+    width:700px;
 
-}
+    height:700px;
 
-.c2{
+    background:
 
-width:320px;
-height:320px;
+    rgba(255,255,255,.08);
 
-background:#FFD54F;
+    border-radius:50%;
 
-right:-80px;
-bottom:-50px;
+    top:-250px;
 
-animation-delay:2s;
+    left:-150px;
 
 }
 
-.c3{
+.background::before{
 
-width:240px;
-height:240px;
+    content:"";
 
-background:#ffffff;
+    position:absolute;
 
-top:45%;
+    width:500px;
 
-left:50%;
+    height:500px;
 
-transform:translate(-50%,-50%);
+    background:
 
-animation-delay:4s;
+    rgba(255,255,255,.06);
+
+    border-radius:50%;
+
+    bottom:-180px;
+
+    right:-120px;
 
 }
 
-/* -------------------- */
+/* ==========================
+   Login Card
+========================== */
 
 .login-card{
 
-position:relative;
+    position:relative;
 
-z-index:10;
+    z-index:5;
 
-width:430px;
+    width:430px;
 
-max-width:92%;
+    background:
 
-padding:45px;
+    rgba(255,255,255,.95);
 
-border-radius:28px;
+    backdrop-filter:blur(18px);
 
-background:rgba(255,255,255,.14);
+    border-radius:24px;
 
-backdrop-filter:blur(18px);
+    padding:45px;
 
--webkit-backdrop-filter:blur(18px);
+    box-shadow:
 
-border:1px solid rgba(255,255,255,.18);
+    0 25px 60px rgba(0,0,0,.25);
 
-box-shadow:
+    animation:
 
-0 20px 60px rgba(0,0,0,.30),
-
-0 0 30px rgba(255,255,255,.08);
-
-animation:card .8s ease;
+    fadeIn .6s ease;
 
 }
 
-/* -------------------- */
-
 .logo{
 
-text-align:center;
+    text-align:center;
 
-margin-bottom:10px;
+    margin-bottom:20px;
 
 }
 
 .logo img{
 
-width:120px;
+    width:110px;
 
-transition:.4s;
+    transition:.4s;
 
 }
 
 .logo img:hover{
 
-transform:scale(1.08);
+    transform:scale(1.05);
 
 }
 
-/* -------------------- */
+.login-card h1{
 
-h1{
+    color:#0F4C81;
 
-text-align:center;
+    text-align:center;
 
-font-size:30px;
+    margin-bottom:8px;
 
-color:#fff;
-
-margin-top:8px;
+    font-size:28px;
 
 }
 
-.subtitle{
+.login-card p{
 
-text-align:center;
+    text-align:center;
 
-margin:12px 0 35px;
+    color:#666;
 
-color:#F3F3F3;
+    margin-bottom:30px;
 
-font-size:15px;
+    line-height:28px;
 
 }
-
-/* -------------------- */
+/* ==========================
+   Inputs
+========================== */
 
 .input-group{
 
-margin-bottom:22px;
+    margin-bottom:22px;
 
 }
 
 .input-group label{
 
-display:block;
+    display:block;
 
-margin-bottom:8px;
+    margin-bottom:8px;
 
-font-size:14px;
+    color:#333;
 
-font-weight:600;
+    font-weight:600;
 
-color:#fff;
+    font-size:14px;
 
 }
 
 .input-group input{
 
-width:100%;
+    width:100%;
 
-height:56px;
+    padding:15px 18px;
 
-border:none;
+    border-radius:14px;
 
-outline:none;
+    border:2px solid #dbe5f1;
 
-border-radius:14px;
+    outline:none;
 
-padding:0 18px;
+    font-size:15px;
 
-font-size:16px;
+    transition:.30s;
 
-background:rgba(255,255,255,.92);
-
-transition:.30s;
+    background:#fff;
 
 }
 
 .input-group input:focus{
 
-background:#fff;
+    border-color:#1976D2;
 
-transform:translateY(-2px);
+    box-shadow:
 
-box-shadow:
-
-0 0 0 4px rgba(255,255,255,.18);
+    0 0 0 5px rgba(25,118,210,.10);
 
 }
 
-small{
+.input-group input:hover{
 
-display:block;
-
-height:18px;
-
-padding-top:6px;
-
-color:#FFE082;
+    border-color:#90CAF9;
 
 }
 
-/* -------------------- */
+.input-group small{
 
-button{
+    display:block;
 
-width:100%;
+    margin-top:7px;
 
-height:58px;
+    min-height:20px;
 
-border:none;
-
-cursor:pointer;
-
-border-radius:14px;
-
-font-size:18px;
-
-font-weight:bold;
-
-background:#D4AF37;
-
-color:#222;
-
-transition:.35s;
+    font-size:13px;
 
 }
 
-button:hover{
+/* ==========================
+   Button
+========================== */
 
-transform:translateY(-3px);
+#loginButton{
 
-box-shadow:
+    width:100%;
 
-0 15px 35px rgba(212,175,55,.45);
+    border:none;
 
-}
+    border-radius:14px;
 
-/* -------------------- */
+    padding:16px;
 
-.footer{
+    margin-top:10px;
 
-margin-top:28px;
+    cursor:pointer;
 
-text-align:center;
+    background:
 
-font-size:13px;
+    linear-gradient(
 
-line-height:28px;
+        135deg,
 
-color:#ECECEC;
+        #1565C0,
 
-}
+        #1E88E5
 
-/* -------------------- */
+    );
 
-@keyframes float{
+    color:#fff;
 
-0%{
+    font-size:17px;
 
-transform:translateY(0px);
+    font-weight:bold;
 
-}
+    transition:.30s;
 
-50%{
+    box-shadow:
 
-transform:translateY(-25px);
-
-}
-
-100%{
-
-transform:translateY(0px);
+    0 10px 25px rgba(21,101,192,.30);
 
 }
 
-}
+#loginButton:hover{
 
-@keyframes card{
+    transform:translateY(-2px);
 
-from{
+    box-shadow:
 
-opacity:0;
-
-transform:translateY(40px);
+    0 15px 30px rgba(21,101,192,.35);
 
 }
 
-to{
+#loginButton:active{
 
-opacity:1;
-
-transform:translateY(0);
+    transform:scale(.98);
 
 }
 
-}
+#loginButton:disabled{
 
-/* -------------------- */
+    cursor:not-allowed;
 
-@media(max-width:768px){
-
-body{
-
-padding:20px;
-
-overflow:auto;
+    opacity:.85;
 
 }
+
+/* ==========================
+   Fade Animation
+========================== */
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+
+        translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+
+        translateY(0);
+
+    }
+
+}
+/* ==========================
+   Progress Overlay
+========================== */
+
+#progressOverlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(15,76,129,.35);
+
+    backdrop-filter:blur(8px);
+
+    z-index:9999;
+
+}
+
+.progress-card{
+
+    width:420px;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+
+    animation:fadeIn .35s ease;
+
+    text-align:center;
+
+}
+
+.progress-card h2{
+
+    color:#0F4C81;
+
+    margin-bottom:25px;
+
+    font-size:24px;
+
+}
+
+.progress{
+
+    width:100%;
+
+    height:14px;
+
+    background:#E8EEF7;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+}
+
+#progressBar{
+
+    width:0%;
+
+    height:100%;
+
+    border-radius:30px;
+
+    background:linear-gradient(90deg,#1565C0,#42A5F5);
+
+    transition:width .4s ease;
+
+}
+
+#progressPercent{
+
+    margin-top:18px;
+
+    color:#1565C0;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+/* ==========================
+   Toast
+========================== */
+
+.toast{
+
+    position:fixed;
+
+    top:25px;
+
+    right:25px;
+
+    min-width:280px;
+
+    padding:18px 22px;
+
+    border-radius:14px;
+
+    color:#fff;
+
+    font-weight:bold;
+
+    font-size:15px;
+
+    opacity:0;
+
+    transform:translateX(120%);
+
+    transition:.35s;
+
+    z-index:10000;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+.toast.show{
+
+    opacity:1;
+
+    transform:translateX(0);
+
+}
+
+.toast.success{
+
+    background:#2E7D32;
+
+}
+
+.toast.error{
+
+    background:#C62828;
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:600px){
 
 .login-card{
 
-padding:30px 24px;
+width:92%;
+
+padding:30px;
+
+}
+
+.progress-card{
+
+width:92%;
+
+padding:30px;
 
 }
 
 .logo img{
 
-width:95px;
+width:90px;
 
 }
 
-h1{
+.login-card h1{
 
 font-size:24px;
-
-}
-
-.subtitle{
-
-font-size:14px;
 
 }
 

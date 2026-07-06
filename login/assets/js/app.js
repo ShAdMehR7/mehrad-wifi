@@ -2,493 +2,562 @@
 ====================================================
 
 Mehrad Mall WiFi
-Version : 1.1.0
 
-Ajax Login
+Version 1.3
 
 ====================================================
 */
 
+
 const form = document.getElementById("loginForm");
 
-const phoneInput = document.querySelector('input[name="phone"]');
-const nationalInput = document.querySelector('input[name="national_code"]');
+const phone = document.querySelector('input[name="phone"]');
+
+const national = document.querySelector('input[name="national_code"]');
+
+const loginButton = document.getElementById("loginButton");
 
 const phoneError = document.getElementById("phoneError");
+
 const nationalError = document.getElementById("nationalError");
 
-const button = document.getElementById("loginButton");
 
-/* =======================================
-   Loading Overlay
-======================================= */
+const overlay = document.getElementById("progressOverlay");
 
-const overlay = document.createElement("div");
+const progressBar = document.getElementById("progressBar");
 
-overlay.id = "loadingOverlay";
+const progressText = document.getElementById("progressPercent");
 
-overlay.innerHTML = `
-<div class="loading-box">
+const progressTitle = document.getElementById("progressTitle");
 
-<div class="spinner"></div>
 
-<h2>در حال احراز هویت</h2>
+let working = false;
 
-<p>
 
-لطفاً چند لحظه صبر کنید...
+/* =====================================
 
-</p>
+Progress
 
-</div>
-`;
+===================================== */
 
-document.body.appendChild(overlay);
-
-/* =======================================
-   Overlay Functions
-======================================= */
-
-function showLoading(){
+function showProgress(){
 
 overlay.style.display="flex";
 
 }
 
-function hideLoading(){
+
+function hideProgress(){
 
 overlay.style.display="none";
 
-}
+progressBar.style.width="0%";
 
-/* =======================================
-   Validation
-======================================= */
-
-function validatePhone(phone){
-
-return /^09\d{9}$/.test(phone);
+progressText.innerHTML="0%";
 
 }
 
-function validateNationalCode(code){
 
-if(!/^\d{10}$/.test(code))
+function setProgress(percent,title){
+
+progressBar.style.width=percent+"%";
+
+progressText.innerHTML=percent+"%";
+
+progressTitle.innerHTML=title;
+
+}
+
+
+/* =====================================
+
+Toast
+
+===================================== */
+
+function toast(message,type="success"){
+
+const div=document.createElement("div");
+
+div.className="toast "+type;
+
+div.innerHTML=
+
+(type==="success" ? "✅ " : "❌ ")
+
++message;
+
+document.body.appendChild(div);
+
+setTimeout(()=>{
+
+div.classList.add("show");
+
+},50);
+
+setTimeout(()=>{
+
+div.classList.remove("show");
+
+setTimeout(()=>{
+
+div.remove();
+
+},300);
+
+},2500);
+
+}
+
+
+/* =====================================
+
+Validation
+
+===================================== */
+
+function validatePhone(value){
+
+return /^09\d{9}$/.test(value);
+
+}
+
+
+function validateNational(value){
+
+if(!/^\d{10}$/.test(value))
+
 return false;
 
-if(/^(\d)\1+$/.test(code))
+if(/^(\d)\1+$/.test(value))
+
 return false;
 
 let sum=0;
 
 for(let i=0;i<9;i++){
 
-sum+=parseInt(code[i])*(10-i);
+sum+=parseInt(value[i])*(10-i);
 
 }
 
-let remainder=sum%11;
+let remain=sum%11;
 
-let control=parseInt(code[9]);
+let control=parseInt(value[9]);
 
-if(remainder<2){
+if(remain<2)
 
-return control===remainder;
+return control===remain;
+
+return control===11-remain;
+
+}
+/* =====================================
+
+Live Validation
+
+===================================== */
+
+phone.addEventListener("input",()=>{
+
+phone.value=phone.value.replace(/\D/g,"");
+
+if(phone.value===""){
+
+phone.style.borderColor="#dbe5f1";
+
+phoneError.innerHTML="";
+
+return;
 
 }
 
-return control===11-remainder;
+if(validatePhone(phone.value)){
+
+phone.style.borderColor="#2E7D32";
+
+phoneError.style.color="#2E7D32";
+
+phoneError.innerHTML="✔ شماره تماس صحیح است";
+
+}else{
+
+phone.style.borderColor="#C62828";
+
+phoneError.style.color="#C62828";
+
+phoneError.innerHTML="شماره تماس معتبر نیست";
 
 }
-/* =======================================
-   Live Validation
-======================================= */
-
-phoneInput.addEventListener("input", () => {
-
-    phoneInput.value = phoneInput.value.replace(/\D/g, '');
-
-    if (phoneInput.value.length === 0) {
-
-        phoneError.innerHTML = "";
-        phoneInput.style.borderColor = "#ddd";
-        return;
-
-    }
-
-    if (validatePhone(phoneInput.value)) {
-
-        phoneError.innerHTML = "✅ شماره تماس صحیح است";
-        phoneError.style.color = "#4CAF50";
-        phoneInput.style.borderColor = "#4CAF50";
-
-    } else {
-
-        phoneError.innerHTML = "شماره تماس معتبر نیست";
-        phoneError.style.color = "#ff5252";
-        phoneInput.style.borderColor = "#ff5252";
-
-    }
 
 });
 
 
-nationalInput.addEventListener("input", () => {
+national.addEventListener("input",()=>{
 
-    nationalInput.value = nationalInput.value.replace(/\D/g, '');
+national.value=national.value.replace(/\D/g,"");
 
-    if (nationalInput.value.length === 0) {
+if(national.value===""){
 
-        nationalError.innerHTML = "";
-        nationalInput.style.borderColor = "#ddd";
-        return;
+national.style.borderColor="#dbe5f1";
 
-    }
+nationalError.innerHTML="";
 
-    if (validateNationalCode(nationalInput.value)) {
+return;
 
-        nationalError.innerHTML = "✅ کد ملی صحیح است";
-        nationalError.style.color = "#4CAF50";
-        nationalInput.style.borderColor = "#4CAF50";
+}
 
-    } else {
+if(validateNational(national.value)){
 
-        nationalError.innerHTML = "کد ملی معتبر نیست";
-        nationalError.style.color = "#ff5252";
-        nationalInput.style.borderColor = "#ff5252";
+national.style.borderColor="#2E7D32";
 
-    }
+nationalError.style.color="#2E7D32";
+
+nationalError.innerHTML="✔ کد ملی صحیح است";
+
+}else{
+
+national.style.borderColor="#C62828";
+
+nationalError.style.color="#C62828";
+
+nationalError.innerHTML="کد ملی معتبر نیست";
+
+}
 
 });
 
 
-/* =======================================
-   Disable Double Click
-======================================= */
+/* =====================================
 
-let sending = false;
+Login Submit
 
+===================================== */
 
-/* =======================================
-   Ajax Login
-======================================= */
+form.addEventListener("submit",async function(e){
 
-form.addEventListener("submit", async function(e){
+e.preventDefault();
 
-    e.preventDefault();
+if(working)
 
-    if(sending)
-        return;
+return;
 
-    if(!validatePhone(phoneInput.value))
-        return;
+if(!validatePhone(phone.value)){
 
-    if(!validateNationalCode(nationalInput.value))
-        return;
+toast("شماره تماس صحیح نیست","error");
 
-    sending = true;
+return;
 
-    button.disabled = true;
+}
 
-    button.innerHTML = "در حال اتصال...";
+if(!validateNational(national.value)){
 
-    showLoading();
+toast("کد ملی معتبر نیست","error");
 
-    const formData = new FormData(form);
+return;
 
-    try{
+}
 
-        const response = await fetch("./api/auth.php",{
+working=true;
 
-            method:"POST",
+loginButton.disabled=true;
 
-            body:formData
+loginButton.innerHTML="در حال بررسی...";
 
-        });
+showProgress();
 
-        const result = await response.json();
-                hideLoading();
+setProgress(
+
+10,
+
+"در حال بررسی اطلاعات..."
+
+);
+
+await delay(500);
+
+setProgress(
+
+25,
+
+"اعتبارسنجی اطلاعات..."
+
+);
+
+await delay(500);
+
+const formData=new FormData(form);
+
+formData.append(
+
+"phone",
+
+phone.value
+
+);
+
+formData.append(
+
+"national_code",
+
+national.value
+
+);
+
+try{
+
+setProgress(
+
+40,
+
+"اتصال به سرور..."
+
+);
+
+const response=await fetch(
+
+"./api/auth.php",
+
+{
+
+method:"POST",
+
+body:formData
+
+}
+
+);
+
+setProgress(
+
+60,
+
+"دریافت پاسخ سرور..."
+
+);
+
+const result=await response.json();
+/* =====================================
+
+Server Response
+
+===================================== */
 
         if(result.success){
 
-            button.innerHTML = "✅ ورود موفق";
-            setTimeout(() => {
+            setProgress(
 
-    button.innerHTML = "ورود به اینترنت";
+                80,
 
-    button.style.background = "";
+                "بررسی اطلاعات کاربر..."
 
-    button.disabled = false;
+            );
 
-    sending = false;
+            await delay(600);
 
-},2000);
+            setProgress(
 
-            button.style.background = "#4CAF50";
+                100,
 
-            setTimeout(function(){
+                "ورود با موفقیت انجام شد"
 
-                showToast(result.message,"success");
+            );
 
-                /*
-                 * نسخه بعد:
-                 *
-                 * window.location.href = result.redirect;
-                 *
-                 * یا:
-                 *
-                 * window.location.href = "/login/success.php";
-                 *
-                 */
+            loginButton.innerHTML="✔ ورود موفق";
 
-            },500);
+            loginButton.style.background="#2E7D32";
+
+            toast(result.message,"success");
+
+            /*
+             * نسخه بعدی:
+             *
+             * window.location.href=result.redirect;
+             *
+             */
+
+            setTimeout(()=>{
+
+                hideProgress();
+
+            },1200);
 
         }else{
 
-            button.innerHTML = "ورود به اینترنت";
+            hideProgress();
 
-            button.disabled = false;
+            toast(result.message,"error");
 
-            sending = false;
+            loginButton.innerHTML="ورود به اینترنت";
 
-            showToast(result.message,"error");
+            loginButton.disabled=false;
+
+            working=false;
 
         }
 
     }catch(error){
 
-        hideLoading();
-
-        button.innerHTML = "ورود به اینترنت";
-
-        button.disabled = false;
-
-        sending = false;
-
-        showToast("خطا در ارتباط با سرور","error");
-
         console.error(error);
+
+        hideProgress();
+
+        toast(
+
+            "ارتباط با سرور برقرار نشد",
+
+            "error"
+
+        );
+
+        loginButton.innerHTML="ورود به اینترنت";
+
+        loginButton.disabled=false;
+
+        working=false;
 
     }
 
 });
 
 
-/* =======================================
-   Initial State
-======================================= */
+/* =====================================
 
-hideLoading();
+Delay
 
+===================================== */
 
-/* =======================================
-   Inject Loading CSS
-======================================= */
+function delay(ms){
 
-const style = document.createElement("style");
+return new Promise(resolve=>{
 
-style.innerHTML = `
+setTimeout(resolve,ms);
 
-#loadingOverlay{
+});
 
-position:fixed;
+}
+/* =====================================
 
-top:0;
+Reset Form
 
-left:0;
+===================================== */
 
-right:0;
+function resetForm(){
 
-bottom:0;
+phone.value="";
 
-display:none;
+national.value="";
 
-justify-content:center;
+phoneError.innerHTML="";
 
-align-items:center;
+nationalError.innerHTML="";
 
-background:rgba(0,0,0,.45);
+phone.style.borderColor="#dbe5f1";
 
-backdrop-filter:blur(5px);
+national.style.borderColor="#dbe5f1";
 
-z-index:99999;
+loginButton.innerHTML="ورود به اینترنت";
+
+loginButton.style.background="";
+
+loginButton.disabled=false;
+
+working=false;
+
+phone.focus();
 
 }
 
-.loading-box{
 
-background:#fff;
+/* =====================================
 
-padding:35px;
+Future Hooks
 
-border-radius:20px;
+===================================== */
 
-text-align:center;
+/*
+این توابع در نسخه‌های بعدی تکمیل می‌شوند.
+فعلاً فقط ساختار پروژه را آماده می‌کنند.
+*/
 
-width:320px;
+async function loadMemberInformation(member){
 
-box-shadow:0 20px 60px rgba(0,0,0,.25);
-
-animation:popup .35s ease;
-
-}
-
-.spinner{
-
-width:55px;
-
-height:55px;
-
-border:5px solid #eee;
-
-border-top:5px solid #0F4C81;
-
-border-radius:50%;
-
-margin:0 auto 20px;
-
-animation:spin 1s linear infinite;
+    console.log("Member :",member);
 
 }
 
-.loading-box h2{
+async function radiusLogin(member){
 
-margin-bottom:10px;
-
-font-size:22px;
-
-color:#0F4C81;
+    console.log("Radius Login");
 
 }
 
-.loading-box p{
+async function mikrotikLogin(member){
 
-color:#666;
-
-font-size:15px;
+    console.log("MikroTik Login");
 
 }
 
-@keyframes spin{
 
-100%{
+/* =====================================
 
-transform:rotate(360deg);
+Initialization
 
-}
+===================================== */
 
-}
+window.addEventListener("load",()=>{
 
-@keyframes popup{
+hideProgress();
 
-from{
+phone.focus();
 
-opacity:0;
+});
 
-transform:scale(.85);
 
-}
+/* =====================================
 
-to{
+Enter Key Navigation
 
-opacity:1;
+===================================== */
 
-transform:scale(1);
+phone.addEventListener("keydown",(e)=>{
 
-}
-/* Toast */
+if(e.key==="Enter"){
 
-.toast{
+e.preventDefault();
 
-position:fixed;
-
-top:25px;
-
-right:25px;
-
-padding:18px 24px;
-
-min-width:260px;
-
-border-radius:14px;
-
-font-size:15px;
-
-font-weight:600;
-
-color:#fff;
-
-opacity:0;
-
-transform:translateX(120%);
-
-transition:.35s;
-
-z-index:999999;
-
-box-shadow:0 15px 40px rgba(0,0,0,.25);
+national.focus();
 
 }
 
-.toast.show{
+});
 
-opacity:1;
 
-transform:translateX(0);
+national.addEventListener("keydown",(e)=>{
 
-}
+if(e.key==="Enter"){
 
-.toast.success{
+e.preventDefault();
 
-background:#2E7D32;
-
-}
-
-.toast.error{
-
-background:#C62828;
+form.requestSubmit();
 
 }
 
-}
+});
 
-`;
 
-document.head.appendChild(style);
-/* =======================================
-   Toast Notification
-======================================= */
+/* =====================================
 
-function showToast(message, type = "success") {
+Auto Reset After Success
 
-    const toast = document.createElement("div");
+===================================== */
 
-    toast.className = "toast " + type;
+setInterval(()=>{
 
-    toast.innerHTML =
+if(!working){
 
-(type==="success" ? "✅ " : "❌ ")
-
-+ message;
-
-    document.body.appendChild(toast);
-
-    setTimeout(() => {
-
-        toast.classList.add("show");
-
-    }, 50);
-
-    setTimeout(() => {
-
-        toast.classList.remove("show");
-
-        setTimeout(() => {
-
-            toast.remove();
-
-        }, 300);
-
-    }, 3000);
+loginButton.disabled=false;
 
 }
+
+},1000);

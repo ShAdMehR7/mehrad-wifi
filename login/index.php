@@ -1,11 +1,4 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Mehrad Mall WiFi
-|--------------------------------------------------------------------------
-| Version : 1.0.1
-|--------------------------------------------------------------------------
-*/
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -13,37 +6,44 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mehrad Mall WiFi</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<link rel="stylesheet" href="assets/css/style.css">
+<title>
+
+Mehrad Mall WiFi
+
+</title>
+
+<link rel="stylesheet"
+href="assets/css/style.css">
 
 </head>
 
 <body>
 
-<div class="background">
-
-<div class="circle c1"></div>
-<div class="circle c2"></div>
-<div class="circle c3"></div>
-
-</div>
+<div class="background"></div>
 
 <div class="login-card">
 
 <div class="logo">
 
-<img src="assets/img/logo.png" alt="Mehrad Mall">
+<img
+src="assets/img/logo.png"
+alt="Mehrad Mall">
 
 </div>
 
-<h1>اینترنت رایگان مهرادمال</h1>
+<h1>
 
-<p class="subtitle">
+Mehrad Mall WiFi
 
-ویژه اعضای باشگاه مشتریان
+</h1>
+
+<p>
+
+برای استفاده از اینترنت ابتدا وارد شوید
 
 </p>
 
@@ -58,11 +58,17 @@
 </label>
 
 <input
+
 type="text"
+
 name="phone"
-placeholder="0912xxxxxxx"
+
 maxlength="11"
+
 autocomplete="off"
+
+placeholder="0912xxxxxxx"
+
 >
 
 <small id="phoneError"></small>
@@ -78,18 +84,26 @@ autocomplete="off"
 </label>
 
 <input
+
 type="text"
+
 name="national_code"
-placeholder="**********"
+
 maxlength="10"
+
 autocomplete="off"
+
+placeholder="**********"
+
 >
 
 <small id="nationalError"></small>
 
 </div>
 
-<button id="loginButton" type="submit">
+<button
+id="loginButton"
+type="submit">
 
 ورود به اینترنت
 
@@ -97,13 +111,32 @@ autocomplete="off"
 
 </form>
 
-<div class="footer">
+</div>
 
-اینترنت رایگان ویژه اعضای باشگاه مشتریان مهرادمال
+<div id="progressOverlay">
 
-<br>
+<div class="progress-card">
 
-© 2026 Mehrad Mall
+<h2 id="progressTitle">
+
+در حال بررسی اطلاعات...
+
+</h2>
+
+<div class="progress">
+
+<div
+id="progressBar">
+
+</div>
+
+</div>
+
+<p id="progressPercent">
+
+0%
+
+</p>
 
 </div>
 
