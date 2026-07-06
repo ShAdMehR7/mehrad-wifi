@@ -47,7 +47,7 @@
 
 </p>
 
-<form action="auth.php" method="POST">
+<form id="loginForm">
 
 <div class="input-group">
 
@@ -89,7 +89,7 @@ autocomplete="off"
 
 </div>
 
-<button type="submit">
+<button id="loginButton" type="submit">
 
 ورود به اینترنت
 
