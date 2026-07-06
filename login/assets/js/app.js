@@ -212,6 +212,17 @@ form.addEventListener("submit", async function(e){
         if(result.success){
 
             button.innerHTML = "✅ ورود موفق";
+            setTimeout(() => {
+
+    button.innerHTML = "ورود به اینترنت";
+
+    button.style.background = "";
+
+    button.disabled = false;
+
+    sending = false;
+
+},2000);
 
             button.style.background = "#4CAF50";
 
@@ -391,23 +402,25 @@ transform:scale(1);
 
 position:fixed;
 
-top:30px;
+top:25px;
 
-left:50%;
+right:25px;
 
-transform:translateX(-50%) translateY(-50px);
+padding:18px 24px;
 
-padding:18px 28px;
+min-width:260px;
 
-border-radius:12px;
+border-radius:14px;
 
 font-size:15px;
 
-font-weight:bold;
+font-weight:600;
 
 color:#fff;
 
 opacity:0;
+
+transform:translateX(120%);
 
 transition:.35s;
 
@@ -421,7 +434,7 @@ box-shadow:0 15px 40px rgba(0,0,0,.25);
 
 opacity:1;
 
-transform:translateX(-50%) translateY(0);
+transform:translateX(0);
 
 }
 
@@ -452,7 +465,11 @@ function showToast(message, type = "success") {
 
     toast.className = "toast " + type;
 
-    toast.innerHTML = message;
+    toast.innerHTML =
+
+(type==="success" ? "✅ " : "❌ ")
+
++ message;
 
     document.body.appendChild(toast);
 
