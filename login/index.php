@@ -1,61 +1,103 @@
 <?php
-
-$config = require __DIR__.'/config/config.php';
-
+// صفحه اصلی ورود به وای‌فای مهرادمال
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MehradMall WiFi</title>
+    <title>Mehrad Mall WiFi</title>
 
-<link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-<div class="login-box">
+<div class="page">
 
-<h1>MehradMall WiFi</h1>
+    <div class="login-card">
 
-<form action="auth.php" method="post">
+        <div class="logo">
 
-<label>
+            <img src="assets/img/logo.png" alt="Mehrad Mall">
 
-شماره همراه
+        </div>
 
-</label>
+        <h1>شبکه اینترنت مهرادمال</h1>
 
-<input
-type="text"
-name="phoneNumber"
-placeholder="0912xxxxxxx"
-required>
+        <p class="subtitle">
 
-<label>
+            برای استفاده از اینترنت رایگان، اطلاعات خود را وارد نمایید.
 
-کد ملی
+        </p>
 
-</label>
+        <form id="loginForm" action="auth.php" method="POST">
 
-<input
-type="password"
-name="nationalCode"
-required>
+            <div class="form-group">
 
-<button type="submit">
+                <label>
 
-اتصال به اینترنت
+                    شماره تماس
 
-</button>
+                </label>
 
-</form>
+                <input
+                    type="text"
+                    id="mobile"
+                    name="mobile"
+                    maxlength="11"
+                    placeholder="09123456789"
+                    autocomplete="off"
+                >
+
+                <small id="mobileError"></small>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>
+
+                    کد ملی
+
+                </label>
+
+                <input
+                    type="text"
+                    id="nationalCode"
+                    name="nationalCode"
+                    maxlength="10"
+                    placeholder="1234567890"
+                    autocomplete="off"
+                >
+
+                <small id="nationalError"></small>
+
+            </div>
+
+            <button type="submit">
+
+                ورود به اینترنت
+
+            </button>
+
+        </form>
+
+        <div class="footer">
+
+            با ورود به سامانه، قوانین استفاده از اینترنت مهرادمال را می‌پذیرم.
+
+        </div>
+
+    </div>
 
 </div>
+
+<script src="assets/js/app.js"></script>
 
 </body>
 
