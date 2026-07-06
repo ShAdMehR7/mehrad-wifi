@@ -1,22 +1,91 @@
 <?php
 
-require_once __DIR__ . '/../includes/response.php';
+header('Content-Type: application/json; charset=utf-8');
+
+$config = require __DIR__ . '/../config/config.php';
 
 $phone = trim($_POST['phone'] ?? '');
 $national = trim($_POST['national_code'] ?? '');
 
 if ($phone == '' || $national == '') {
 
-    jsonResponse(false, 'تمام فیلدها الزامی است.');
-
+    echo json_encode([
+        'success' => false,
+        'message' => 'اطلاعات ناقص است.'
+    ]);
+    exit;
 }
 
-sleep(2);
+$ch = curl_init();
 
-jsonResponse(true, 'اطلاعات دریافت شد.', [
+curl_setopt_array($ch, [
 
-    'phone' => $phone,
+    CURLOPT_URL => $config['club_api']['url'],
 
-    'national_code' => $national
+    CURLOPT_RETURNTRANSFER => true,
+
+    CURLOPT_POST => true,
+
+    CURLOPT_TIMEOUT => $config['club_api']['timeout'],
+
+    CURLOPT_POSTFIELDS => [
+
+        'phoneNumber' => $phone,
+
+        'nationalCode' => $national
+
+    ]
 
 ]);
+
+$response = curl_exec($ch);
+
+$error = curl_error($ch);
+
+curl_close($ch);
+
+if ($error) {
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'ارتباط با API برقرار نشد.'
+    ]);
+
+    exit;
+}
+
+$data = json_decode($response, true);
+
+if (!$data) {
+
+    echo json_encode([
+        'success' => false,
+        'message' => 'پاسخ API معتبر نیست.'
+    ]);
+
+    exit;
+}
+
+if (($data['status'] ?? 500) == 200) {
+
+    echo json_encode([
+
+        'success' => true,
+
+        'message' => $data['reply_message'] ?? 'ورود موفق',
+
+        'radius' => $data
+
+    ]);
+
+} else {
+
+    echo json_encode([
+
+        'success' => false,
+
+        'message' => $data['reply_message'] ?? 'کاربر یافت نشد'
+
+    ]);
+
+}
