@@ -1,243 +1,388 @@
-/* ===========================
-   Mehrad Mall WiFi
-   Version 1.0
-=========================== */
+/*
+====================================================
+ Mehrad Mall WiFi
+ Version : 1.0.1
+====================================================
+*/
 
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap');
 
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 body{
 
-    font-family:'Vazirmatn',sans-serif;
+font-family:'Vazirmatn',sans-serif;
+direction:rtl;
+overflow:hidden;
 
-    background:linear-gradient(135deg,#0F4C81,#2563EB);
+min-height:100vh;
 
-    min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
 
-    display:flex;
+background:
+linear-gradient(135deg,#0A2E57,#0F4C81,#2563EB);
 
-    justify-content:center;
+position:relative;
 
-    align-items:center;
+}
 
-    direction:rtl;
+/* -------------------- */
+
+.background{
+
+position:absolute;
+inset:0;
+
+overflow:hidden;
 
 }
 
-.page{
+/* -------------------- */
 
-    width:100%;
+.circle{
 
-    padding:30px;
+position:absolute;
+
+border-radius:50%;
+
+filter:blur(40px);
+
+opacity:.35;
+
+animation:float 10s ease-in-out infinite;
 
 }
+
+.c1{
+
+width:420px;
+height:420px;
+
+background:#4FC3F7;
+
+top:-100px;
+left:-120px;
+
+}
+
+.c2{
+
+width:320px;
+height:320px;
+
+background:#FFD54F;
+
+right:-80px;
+bottom:-50px;
+
+animation-delay:2s;
+
+}
+
+.c3{
+
+width:240px;
+height:240px;
+
+background:#ffffff;
+
+top:45%;
+
+left:50%;
+
+transform:translate(-50%,-50%);
+
+animation-delay:4s;
+
+}
+
+/* -------------------- */
 
 .login-card{
 
-    width:420px;
+position:relative;
 
-    max-width:100%;
+z-index:10;
 
-    background:#fff;
+width:430px;
 
-    border-radius:20px;
+max-width:92%;
 
-    padding:40px;
+padding:45px;
 
-    margin:auto;
+border-radius:28px;
 
-    box-shadow:0 20px 60px rgba(0,0,0,.18);
+background:rgba(255,255,255,.14);
 
-    animation:fade .7s ease;
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+border:1px solid rgba(255,255,255,.18);
+
+box-shadow:
+
+0 20px 60px rgba(0,0,0,.30),
+
+0 0 30px rgba(255,255,255,.08);
+
+animation:card .8s ease;
 
 }
 
+/* -------------------- */
+
 .logo{
 
-    text-align:center;
+text-align:center;
 
-    margin-bottom:20px;
+margin-bottom:10px;
 
 }
 
 .logo img{
 
-    width:90px;
+width:120px;
+
+transition:.4s;
 
 }
 
+.logo img:hover{
+
+transform:scale(1.08);
+
+}
+
+/* -------------------- */
+
 h1{
 
-    text-align:center;
+text-align:center;
 
-    color:#0F4C81;
+font-size:30px;
 
-    margin-bottom:10px;
+color:#fff;
 
-    font-size:28px;
+margin-top:8px;
 
 }
 
 .subtitle{
 
-    text-align:center;
+text-align:center;
 
-    color:#777;
+margin:12px 0 35px;
 
-    margin-bottom:35px;
+color:#F3F3F3;
 
-    line-height:28px;
-
-}
-
-.form-group{
-
-    margin-bottom:22px;
+font-size:15px;
 
 }
 
-label{
+/* -------------------- */
 
-    display:block;
+.input-group{
 
-    margin-bottom:8px;
-
-    color:#333;
-
-    font-weight:600;
+margin-bottom:22px;
 
 }
 
-input{
+.input-group label{
 
-    width:100%;
+display:block;
 
-    height:55px;
+margin-bottom:8px;
 
-    border:1px solid #ddd;
+font-size:14px;
 
-    border-radius:12px;
+font-weight:600;
 
-    padding:0 18px;
-
-    font-size:16px;
-
-    transition:.3s;
+color:#fff;
 
 }
 
-input:focus{
+.input-group input{
 
-    border-color:#0F4C81;
+width:100%;
 
-    outline:none;
+height:56px;
 
-    box-shadow:0 0 0 4px rgba(15,76,129,.15);
+border:none;
+
+outline:none;
+
+border-radius:14px;
+
+padding:0 18px;
+
+font-size:16px;
+
+background:rgba(255,255,255,.92);
+
+transition:.30s;
+
+}
+
+.input-group input:focus{
+
+background:#fff;
+
+transform:translateY(-2px);
+
+box-shadow:
+
+0 0 0 4px rgba(255,255,255,.18);
 
 }
 
 small{
 
-    display:block;
+display:block;
 
-    margin-top:8px;
+height:18px;
 
-    color:#d32f2f;
+padding-top:6px;
 
-    min-height:18px;
+color:#FFE082;
 
 }
 
+/* -------------------- */
+
 button{
 
-    width:100%;
+width:100%;
 
-    height:56px;
+height:58px;
 
-    border:none;
+border:none;
 
-    border-radius:12px;
+cursor:pointer;
 
-    background:#F4B400;
+border-radius:14px;
 
-    color:#222;
+font-size:18px;
 
-    font-size:18px;
+font-weight:bold;
 
-    font-weight:bold;
+background:#D4AF37;
 
-    cursor:pointer;
+color:#222;
 
-    transition:.3s;
+transition:.35s;
 
 }
 
 button:hover{
 
-    transform:translateY(-2px);
+transform:translateY(-3px);
 
-    box-shadow:0 10px 25px rgba(244,180,0,.35);
+box-shadow:
+
+0 15px 35px rgba(212,175,55,.45);
 
 }
+
+/* -------------------- */
 
 .footer{
 
-    margin-top:30px;
+margin-top:28px;
 
-    text-align:center;
+text-align:center;
 
-    font-size:13px;
+font-size:13px;
 
-    color:#888;
+line-height:28px;
 
-    line-height:25px;
-
-}
-
-@keyframes fade{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(40px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
+color:#ECECEC;
 
 }
 
-@media(max-width:600px){
+/* -------------------- */
+
+@keyframes float{
+
+0%{
+
+transform:translateY(0px);
+
+}
+
+50%{
+
+transform:translateY(-25px);
+
+}
+
+100%{
+
+transform:translateY(0px);
+
+}
+
+}
+
+@keyframes card{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* -------------------- */
+
+@media(max-width:768px){
+
+body{
+
+padding:20px;
+
+overflow:auto;
+
+}
 
 .login-card{
 
-padding:30px 22px;
+padding:30px 24px;
+
+}
+
+.logo img{
+
+width:95px;
 
 }
 
 h1{
 
-font-size:23px;
+font-size:24px;
 
 }
 
 .subtitle{
 
 font-size:14px;
-
-line-height:24px;
 
 }
 

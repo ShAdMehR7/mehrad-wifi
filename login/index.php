@@ -1,99 +1,111 @@
 <?php
-// صفحه اصلی ورود به وای‌فای مهرادمال
+/*
+|--------------------------------------------------------------------------
+| Mehrad Mall WiFi
+|--------------------------------------------------------------------------
+| Version : 1.0.1
+|--------------------------------------------------------------------------
+*/
 ?>
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Mehrad Mall WiFi</title>
+<title>Mehrad Mall WiFi</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
 
-<div class="page">
+<div class="background">
 
-    <div class="login-card">
+<div class="circle c1"></div>
+<div class="circle c2"></div>
+<div class="circle c3"></div>
 
-        <div class="logo">
+</div>
 
-            <img src="assets/img/logo.png" alt="Mehrad Mall">
+<div class="login-card">
 
-        </div>
+<div class="logo">
 
-        <h1>شبکه اینترنت مهرادمال</h1>
+<img src="assets/img/logo.png" alt="Mehrad Mall">
 
-        <p class="subtitle">
+</div>
 
-            برای استفاده از اینترنت رایگان، اطلاعات خود را وارد نمایید.
+<h1>اینترنت رایگان مهرادمال</h1>
 
-        </p>
+<p class="subtitle">
 
-        <form id="loginForm" action="auth.php" method="POST">
+ویژه اعضای باشگاه مشتریان
 
-            <div class="form-group">
+</p>
 
-                <label>
+<form action="auth.php" method="POST">
 
-                    شماره تماس
+<div class="input-group">
 
-                </label>
+<label>
 
-                <input
-                    type="text"
-                    id="mobile"
-                    name="mobile"
-                    maxlength="11"
-                    placeholder="09123456789"
-                    autocomplete="off"
-                >
+📱 شماره تماس
 
-                <small id="mobileError"></small>
+</label>
 
-            </div>
+<input
+type="text"
+name="phone"
+placeholder="0912xxxxxxx"
+maxlength="11"
+autocomplete="off"
+>
 
-            <div class="form-group">
+<small id="phoneError"></small>
 
-                <label>
+</div>
 
-                    کد ملی
+<div class="input-group">
 
-                </label>
+<label>
 
-                <input
-                    type="text"
-                    id="nationalCode"
-                    name="nationalCode"
-                    maxlength="10"
-                    placeholder="1234567890"
-                    autocomplete="off"
-                >
+🪪 کد ملی
 
-                <small id="nationalError"></small>
+</label>
 
-            </div>
+<input
+type="text"
+name="national_code"
+placeholder="**********"
+maxlength="10"
+autocomplete="off"
+>
 
-            <button type="submit">
+<small id="nationalError"></small>
 
-                ورود به اینترنت
+</div>
 
-            </button>
+<button type="submit">
 
-        </form>
+ورود به اینترنت
 
-        <div class="footer">
+</button>
 
-            با ورود به سامانه، قوانین استفاده از اینترنت مهرادمال را می‌پذیرم.
+</form>
 
-        </div>
+<div class="footer">
 
-    </div>
+اینترنت رایگان ویژه اعضای باشگاه مشتریان مهرادمال
+
+<br>
+
+© 2026 Mehrad Mall
+
+</div>
 
 </div>
 
