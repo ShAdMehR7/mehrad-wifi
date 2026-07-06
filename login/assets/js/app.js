@@ -217,7 +217,7 @@ form.addEventListener("submit", async function(e){
 
             setTimeout(function(){
 
-                alert(result.message);
+                showToast(result.message,"success");
 
                 /*
                  * نسخه بعد:
@@ -240,7 +240,7 @@ form.addEventListener("submit", async function(e){
 
             sending = false;
 
-            alert(result.message);
+            showToast(result.message,"error");
 
         }
 
@@ -254,7 +254,7 @@ form.addEventListener("submit", async function(e){
 
         sending = false;
 
-        alert("خطا در ارتباط با سرور");
+        showToast("خطا در ارتباط با سرور","error");
 
         console.error(error);
 
@@ -385,9 +385,93 @@ opacity:1;
 transform:scale(1);
 
 }
+/* Toast */
+
+.toast{
+
+position:fixed;
+
+top:30px;
+
+left:50%;
+
+transform:translateX(-50%) translateY(-50px);
+
+padding:18px 28px;
+
+border-radius:12px;
+
+font-size:15px;
+
+font-weight:bold;
+
+color:#fff;
+
+opacity:0;
+
+transition:.35s;
+
+z-index:999999;
+
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+.toast.show{
+
+opacity:1;
+
+transform:translateX(-50%) translateY(0);
+
+}
+
+.toast.success{
+
+background:#2E7D32;
+
+}
+
+.toast.error{
+
+background:#C62828;
+
+}
 
 }
 
 `;
 
 document.head.appendChild(style);
+/* =======================================
+   Toast Notification
+======================================= */
+
+function showToast(message, type = "success") {
+
+    const toast = document.createElement("div");
+
+    toast.className = "toast " + type;
+
+    toast.innerHTML = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+
+        toast.classList.add("show");
+
+    }, 50);
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+
+            toast.remove();
+
+        }, 300);
+
+    }, 3000);
+
+}
