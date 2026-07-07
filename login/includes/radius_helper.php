@@ -1,6 +1,9 @@
 <?php
 
 $config = require __DIR__ . '/../config/profile_mapper.php';
+echo "<pre>";
+print_r($config);
+exit;
 
 /**
  * تبدیل پاسخ API باشگاه به پاسخ قابل استفاده برای FreeRADIUS

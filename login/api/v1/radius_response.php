@@ -58,9 +58,9 @@ curl_close($ch);
 
 
 $clubResponse = json_decode($response, true);
-echo "<pre>";
-print_r($clubResponse);
-exit;
+// echo "<pre>";
+// print_r($clubResponse);
+// exit;
 
 if (!$clubResponse) {
 
