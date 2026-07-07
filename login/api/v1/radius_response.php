@@ -9,24 +9,41 @@ $config = require __DIR__ . '/../../config/config.php';
 $phone = $_POST['phoneNumber'] ?? '';
 $password = $_POST['nationalCode'] ?? '';
 
-if ($phone == '' || $password == '') {
+$phone = $_POST['phoneNumber'] ?? '';
+
+if ($phone == '') {
 
     http_response_code(400);
 
     echo json_encode([
         'status' => 400,
-        'message' => 'Missing phoneNumber or nationalCode'
+        'message' => 'Missing phoneNumber'
     ]);
 
     exit;
-}
+} 
+// if ($phone == '' || $password == '') {
+
+//     http_response_code(400);
+
+//     echo json_encode([
+//         'status' => 400,
+//         'message' => 'Missing phoneNumber or nationalCode'
+//     ]);
+
+//     exit;
+// }
 
 $clubApi = $config['club_api']['url'];
 
 $postData = http_build_query([
-    'phoneNumber' => $phone,
-    'nationalCode' => $password
+    'phoneNumber' => $phone
 ]);
+
+// $postData = http_build_query([
+//     'phoneNumber' => $phone,
+//     'nationalCode' => $password
+// ]);
 
 $ch = curl_init($clubApi);
 
@@ -58,9 +75,7 @@ curl_close($ch);
 
 
 $clubResponse = json_decode($response, true);
-// echo "<pre>";
-// print_r($clubResponse);
-// exit;
+
 
 if (!$clubResponse) {
 

@@ -1,11 +1,7 @@
 <?php
 
 $profileMapper = require __DIR__ . '/../config/profile_mapper.php';
-// echo realpath(__DIR__ . '/../config/profile_mapper.php');
-// exit;
-// echo "<pre>";
-// print_r($config);
-// exit;
+
 
 /**
  * تبدیل پاسخ API باشگاه به پاسخ قابل استفاده برای FreeRADIUS
@@ -34,24 +30,6 @@ function buildRadiusResponse(array $clubResponse): array
 );
 
     $profile = $clubResponse['profile'];
-// echo "<pre>";
-
-// echo "CONFIG:\n";
-// var_dump($config);
-
-// echo "\nPROFILE:\n";
-// var_dump($profile);
-
-// echo "\nDIRECT:\n";
-// var_dump($config['Dimend-profile']);
-
-// echo "\nISSET DIRECT:\n";
-// var_dump(isset($config['Dimend-profile']));
-
-// echo "\nISSET PROFILE:\n";
-// var_dump(isset($config[$profile]));
-
-// exit;
     if (!isset($profileMapper[$profile])) {
 
         return [
