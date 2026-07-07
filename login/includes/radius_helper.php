@@ -1,8 +1,8 @@
 <?php
 
 $config = require __DIR__ . '/../config/profile_mapper.php';
-echo realpath(__DIR__ . '/../config/profile_mapper.php');
-exit;
+// echo realpath(__DIR__ . '/../config/profile_mapper.php');
+// exit;
 // echo "<pre>";
 // print_r($config);
 // exit;
@@ -35,10 +35,20 @@ function buildRadiusResponse(array $clubResponse): array
 
     $profile = $clubResponse['profile'];
 echo "<pre>";
-echo "PROFILE = ";
+
+echo "CONFIG:\n";
+var_dump($config);
+
+echo "\nPROFILE:\n";
 var_dump($profile);
 
-echo "KEY EXISTS = ";
+echo "\nDIRECT:\n";
+var_dump($config['Dimend-profile']);
+
+echo "\nISSET DIRECT:\n";
+var_dump(isset($config['Dimend-profile']));
+
+echo "\nISSET PROFILE:\n";
 var_dump(isset($config[$profile]));
 
 exit;
