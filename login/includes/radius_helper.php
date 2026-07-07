@@ -23,6 +23,10 @@ function buildRadiusResponse(array $clubResponse): array
             'message' => 'User not found'
         ];
     }
+    file_put_contents(
+    __DIR__ . '/../logs/profile_debug.log',
+    print_r($clubResponse, true)
+);
 
     $profile = $clubResponse['profile'];
 
