@@ -68,6 +68,33 @@ if (!$data) {
 
 if (($data['status'] ?? 500) == 200) {
 
+/*
+|--------------------------------------------------------------------------
+| ساخت فایل Cache
+|--------------------------------------------------------------------------
+*/
+
+$cache = [
+
+    'phone' => $data['phone'],
+
+    'cleartext_password' => $data['cleartext_password'],
+
+    'profile' => $data['profile'],
+
+    'created_at' => time(),
+
+    'expire_at' => time() + 3600
+
+];
+
+file_put_contents(
+
+    __DIR__ . '/../cache/' . $data['phone'] . '.json',
+
+    json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+
+);
     echo json_encode([
 
         'success' => true,
