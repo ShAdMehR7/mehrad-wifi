@@ -92,14 +92,29 @@ $cache = [
     'expire_at' => time() + 3600
 
 ];
+$file = __DIR__ . '/../cache/' . $data['phone'] . '.json';
 
-file_put_contents(
-
-    __DIR__ . '/../cache/' . $data['phone'] . '.json',
-
+$result = file_put_contents(
+    $file,
     json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-
 );
+
+echo json_encode([
+    "success" => true,
+    "file"    => $file,
+    "written" => $result,
+    "exists"  => file_exists($file),
+    "message" => "TEST"
+]);
+
+exit;
+//file_put_contents(
+
+  //  __DIR__ . '/../cache/' . $data['phone'] . '.json',
+
+    //json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+
+//);
     echo json_encode([
 
         'success' => true,
