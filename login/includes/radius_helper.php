@@ -1,9 +1,9 @@
 <?php
 
 $config = require __DIR__ . '/../config/profile_mapper.php';
-echo "<pre>";
-print_r($config);
-exit;
+// echo "<pre>";
+// print_r($config);
+// exit;
 
 /**
  * تبدیل پاسخ API باشگاه به پاسخ قابل استفاده برای FreeRADIUS
@@ -32,7 +32,14 @@ function buildRadiusResponse(array $clubResponse): array
 );
 
     $profile = $clubResponse['profile'];
+echo "<pre>";
+echo "PROFILE = ";
+var_dump($profile);
 
+echo "KEY EXISTS = ";
+var_dump(isset($config[$profile]));
+
+exit;
     if (!isset($config[$profile])) {
 
         return [
