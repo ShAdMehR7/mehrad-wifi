@@ -1,6 +1,8 @@
 <?php
 
 $config = require __DIR__ . '/../config/profile_mapper.php';
+echo realpath(__DIR__ . '/../config/profile_mapper.php');
+exit;
 // echo "<pre>";
 // print_r($config);
 // exit;
