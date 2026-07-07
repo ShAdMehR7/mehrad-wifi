@@ -56,7 +56,11 @@ if (curl_errno($ch)) {
 
 curl_close($ch);
 
+
 $clubResponse = json_decode($response, true);
+echo "<pre>";
+print_r($clubResponse);
+exit;
 
 if (!$clubResponse) {
 
