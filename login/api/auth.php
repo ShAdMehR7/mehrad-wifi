@@ -2,6 +2,12 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+file_put_contents(
+    __DIR__ . "/../logs/auth_debug.log",
+    date("Y-m-d H:i:s") . " auth.php executed\n",
+    FILE_APPEND
+);
+
 $config = require __DIR__ . '/../config/config.php';
 
 $phone = trim($_POST['phone'] ?? '');
