@@ -67,6 +67,9 @@ if (!$data) {
 }
 
 if (($data['status'] ?? 500) == 200) {
+    echo "<pre>";
+print_r($data);
+exit;
 //     echo json_encode($data, JSON_PRETTY_PRINT);
 // exit;
 
