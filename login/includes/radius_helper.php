@@ -1,6 +1,6 @@
 <?php
 
-$config = require __DIR__ . '/../config/profile_mapper.php';
+$profileMapper = require __DIR__ . '/../config/profile_mapper.php';
 // echo realpath(__DIR__ . '/../config/profile_mapper.php');
 // exit;
 // echo "<pre>";
@@ -15,7 +15,7 @@ $config = require __DIR__ . '/../config/profile_mapper.php';
  */
 function buildRadiusResponse(array $clubResponse): array
 {
-    global $config;
+    global $profileMapper;
 
     // بررسی معتبر بودن پاسخ
     if (
@@ -34,25 +34,25 @@ function buildRadiusResponse(array $clubResponse): array
 );
 
     $profile = $clubResponse['profile'];
-echo "<pre>";
+// echo "<pre>";
 
-echo "CONFIG:\n";
-var_dump($config);
+// echo "CONFIG:\n";
+// var_dump($config);
 
-echo "\nPROFILE:\n";
-var_dump($profile);
+// echo "\nPROFILE:\n";
+// var_dump($profile);
 
-echo "\nDIRECT:\n";
-var_dump($config['Dimend-profile']);
+// echo "\nDIRECT:\n";
+// var_dump($config['Dimend-profile']);
 
-echo "\nISSET DIRECT:\n";
-var_dump(isset($config['Dimend-profile']));
+// echo "\nISSET DIRECT:\n";
+// var_dump(isset($config['Dimend-profile']));
 
-echo "\nISSET PROFILE:\n";
-var_dump(isset($config[$profile]));
+// echo "\nISSET PROFILE:\n";
+// var_dump(isset($config[$profile]));
 
-exit;
-    if (!isset($config[$profile])) {
+// exit;
+    if (!isset($profileMapper[$profile])) {
 
         return [
             'status' => 500,
@@ -60,7 +60,7 @@ exit;
         ];
     }
 
-    $profileConfig = $config[$profile];
+    $profileConfig = $profileMapper[$profile];
 
     return [
 
