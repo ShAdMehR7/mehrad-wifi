@@ -117,10 +117,10 @@ $result = file_put_contents(
 
 echo json_encode([
     "success" => true,
-    "file"    => $file,
-    "written" => $result,
-    "exists"  => file_exists($file),
-    "message" => "TEST"
+    "phone" => $data["phone"],
+    "cleartext_password" => $data["cleartext_password"],
+    "profile" => $data["profile"],
+    "message" => "ورود موفق"
 ]);
 
 exit;
