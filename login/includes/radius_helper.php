@@ -42,29 +42,32 @@ function buildRadiusResponse(array $clubResponse): array
 
     return [
 
-        'control:Cleartext-Password' =>
-            $clubResponse['cleartext_password'],
+    'control:Cleartext-Password' =>
+        $clubResponse['cleartext_password'],
 
-        'reply:Mikrotik-Rate-Limit' =>
-            $profileConfig['rate_limit'],
+    // برای استفاده در صفحه Login
+    'cleartext_password' =>
+        $clubResponse['cleartext_password'],
 
-        'reply:Session-Timeout' =>
-            $profileConfig['session_timeout'],
+    'reply:Mikrotik-Rate-Limit' =>
+        $profileConfig['rate_limit'],
 
-        'reply:Reply-Message' =>
-            'Welcome to MehradMall',
+    'reply:Session-Timeout' =>
+        $profileConfig['session_timeout'],
 
-        // این مقادیر برای استفاده‌های بعدی
-        'profile' =>
-            $profile,
+    'reply:Reply-Message' =>
+        'Welcome to MehradMall',
 
-        'quota' =>
-            $profileConfig['quota'],
+    'profile' =>
+        $profile,
 
-        'phone' =>
-            $clubResponse['phone'],
+    'quota' =>
+        $profileConfig['quota'],
 
-        'status' =>
-            200
-    ];
+    'phone' =>
+        $clubResponse['phone'],
+
+    'status' =>
+        200
+];
 }
