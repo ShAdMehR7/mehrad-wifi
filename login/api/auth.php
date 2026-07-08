@@ -2,6 +2,12 @@
 
 header('Content-Type: application/json; charset=utf-8');
 
+file_put_contents(
+    __DIR__ . "/../logs/auth_debug.log",
+    date("Y-m-d H:i:s") . " auth.php executed\n",
+    FILE_APPEND
+);
+
 $config = require __DIR__ . '/../config/config.php';
 
 $phone = trim($_POST['phone'] ?? '');
@@ -77,6 +83,9 @@ if (!$data) {
 }
 
 if (($data['status'] ?? 500) == 200) {
+    //echo "<pre>";
+//print_r($data);
+//exit;
 //     echo json_encode($data, JSON_PRETTY_PRINT);
 // exit;
 
@@ -99,14 +108,29 @@ $cache = [
     'expire_at' => time() + 3600
 
 ];
+$file = __DIR__ . '/../cache/' . $data['phone'] . '.json';
 
-file_put_contents(
-
-    __DIR__ . '/../cache/' . $data['phone'] . '.json',
-
+$result = file_put_contents(
+    $file,
     json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-
 );
+
+echo json_encode([
+    "success" => true,
+    "file"    => $file,
+    "written" => $result,
+    "exists"  => file_exists($file),
+    "message" => "TEST"
+]);
+
+exit;
+//file_put_contents(
+
+  //  __DIR__ . '/../cache/' . $data['phone'] . '.json',
+
+    //json_encode($cache, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+
+//);
     echo json_encode([
 
         'success' => true,
