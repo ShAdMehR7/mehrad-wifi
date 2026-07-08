@@ -345,42 +345,40 @@ Server Response
 
         if(result.success){
 
-            setProgress(
+            if (result.success) {
 
-                80,
+    setProgress(100, "در حال ورود...");
 
-                "بررسی اطلاعات کاربر..."
+    const form = document.createElement("form");
 
-            );
+    form.method = "POST";
 
-            await delay(600);
+    form.action = "http://11.0.0.1/login";
 
-            setProgress(
+    const username = document.createElement("input");
+    username.type = "hidden";
+    username.name = "username";
+    username.value = result.phone;
 
-                100,
+    const password = document.createElement("input");
+    password.type = "hidden";
+    password.name = "password";
+    password.value = result.cleartext_password;
 
-                "ورود با موفقیت انجام شد"
+    form.appendChild(username);
+    form.appendChild(password);
 
-            );
+    document.body.appendChild(form);
 
-            loginButton.innerHTML="✔ ورود موفق";
+    setTimeout(() => {
 
-            loginButton.style.background="#2E7D32";
+        form.submit();
 
-            toast(result.message,"success");
+    }, 500);
 
-            /*
-             * نسخه بعدی:
-             *
-             * window.location.href=result.redirect;
-             *
-             */
+    return;
 
-            setTimeout(()=>{
-
-                hideProgress();
-
-            },1200);
+}
 
         }else{
 

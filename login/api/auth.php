@@ -10,10 +10,20 @@ $national = trim($_POST['national_code'] ?? '');
 if ($phone == '' || $national == '') {
 
     echo json_encode([
-        'success' => false,
-        'message' => 'اطلاعات ناقص است.'
-    ]);
-    exit;
+
+    "success" => true,
+
+    "phone" => $data['phone'],
+
+    "cleartext_password" => $data['cleartext_password'],
+
+    "profile" => $data['profile'],
+
+    "message" => "ورود موفق"
+
+]);
+
+exit;
 }
 
 $ch = curl_init();
